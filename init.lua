@@ -15,8 +15,8 @@ require('packer').startup(function(use)
   use 'ggandor/lightspeed.nvim' -- Lightspeed quick movement
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'max397574/better-escape.nvim'  -- Better behavior for jk/kj escape mapping
-	use 'windwp/nvim-autopairs' -- Automatic pair closing
-	use 'windwp/nvim-ts-autotag' -- Automatic HTML tag closing
+  use 'windwp/nvim-autopairs' -- Automatic pair closing
+  use 'windwp/nvim-ts-autotag' -- Automatic HTML tag closing
   
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
@@ -309,6 +309,7 @@ null_ls.setup({
     null_ls.builtins.formatting.prettierd, -- prettier, eslint, eslint_d, or prettierd
     null_ls.builtins.formatting.black
   },
+  
   -- lspconfig on-attach moved into null-ls setup to allow for autoformat on save
   on_attach = function(client, bufnr)
     local opts = { buffer = bufnr }
@@ -316,7 +317,7 @@ null_ls.setup({
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<C-i>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wl', function()
@@ -328,6 +329,7 @@ null_ls.setup({
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
     vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
+    
     -- autoformat on save
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
