@@ -238,7 +238,7 @@ require('nvim-treesitter.configs').setup {
     },
   },
   indent = {
-    enable = true,
+    enable = false, -- was not working with Python
   },
   textobjects = {
     select = {
