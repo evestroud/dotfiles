@@ -144,6 +144,52 @@ require('gitsigns').setup {
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
   },
+  
+on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']g', function()
+      if vim.wo.diff then return ']g' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[g', function()
+      if vim.wo.diff then return '[g' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map({'n', 'v'}, '<leader>gs', ':Gitsigns stage_hunk<CR>')
+    map({'n', 'v'}, '<leader>gr', ':Gitsigns reset_hunk<CR>')
+    map('n', '<leader>gS', gs.stage_buffer)
+    map('n', '<leader>gu', gs.undo_stage_hunk)
+    map('n', '<leader>gR', gs.reset_buffer)
+    map('n', '<leader>gp', gs.preview_hunk)
+    map('n', '<leader>gb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    -- map('n', '<leader>gd', gs.diffthis)
+    -- map('n', '<leader>gD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
+
+    -- Text object
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+
+    -- Mappings for Fugitive
+    -- from https://www.reddit.com/r/neovim/comments/v31ft4/comment/iavqkcn/
+    map('n', '<leader>gg', ':Git status<CR>')
+    map('n', '<leader>gc', ':Git commit<CR>')
+    map('n', '<leader>gdd', ':Git diff<CR><C-w>L')
+    map('n', '<leader>gdc', ':Git diff --cached<CR><C-w>L')
+  end
 }
 
 -- Telescope
