@@ -408,8 +408,11 @@ cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex 
 -- Personal keymaps
 vim.keymap.set('n', '\\w', ':set wrap!<CR>') -- Toggle word wrap
 -- Safe paste from clipboard 
-vim.keymap.set({'n', 'i'}, '\\p', ':set paste<CR>"*p:set nopaste!<CR>')
+vim.keymap.set({'n'}, '\\p', ':set paste<CR>"*p:set nopaste!<CR>')
+vim.keymap.set({'i'}, '\\p', '<Esc>:set paste<CR>"*p:set nopaste!<CR>')
 vim.keymap.set('n', 'vv', '^v$h') -- Select text of line only
+vim.keymap.set('i', ';;', '<ESC>A;<ESC>')
+vim.keymap.set('i', '::', '<ESC>A:<ESC>')
 
 -- Quick move between windows
 vim.keymap.set('n', '<C-h>', '<C-W>h')
