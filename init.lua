@@ -52,6 +52,8 @@ require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
   use 'mattn/emmet-vim' -- Clunky emmet engine -- needs a formatter or else it's messy
+  -- Sets comment string for languages embedded in files, e.g. CSS and JS in an HTML file
+  use 'JoosepAlviste/nvim-ts-context-commentstring' 
 end)
 
 --Set highlight on search
@@ -108,7 +110,23 @@ require("better_escape").setup {
 }
 
 --Enable Comment.nvim
-require('Comment').setup()
+require('Comment').setup{
+  pre_hook = function(ctx)
+    local U = require 'Comment.utils'
+
+    local location = nil
+    if ctx.ctype == U.ctype.block then
+      location = require('ts_context_commentstring.utils').get_cursor_location()
+    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+      location = require('ts_context_commentstring.utils').get_visual_start_location()
+    end
+
+    return require('ts_context_commentstring.internal').calculate_commentstring {
+      key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
+      location = location,
+    }
+  end,
+}
 
 --Remap space as leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -272,6 +290,10 @@ require('nvim-treesitter.configs').setup {
         ['[]'] = '@class.outer',
       },
     },
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
   },
 }
 
