@@ -112,7 +112,8 @@ require("which-key").setup()
 
 --Setup quick escape mappings
 require("better_escape").setup {
-      mapping = {"jk", "kj"}
+      mapping = {"jk", "kj"},
+      clear_empty_lines = true
 }
 
 --Enable Comment.nvim
