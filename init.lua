@@ -58,6 +58,7 @@ require('packer').startup(function(use)
   use 'mattn/emmet-vim' -- Clunky emmet engine -- needs a formatter or else it's messy
   -- Sets comment string for languages embedded in files, e.g. CSS and JS in an HTML file
   use 'JoosepAlviste/nvim-ts-context-commentstring' 
+  use 'norcalli/nvim-colorizer.lua' -- Display CSS colors in-editor
 end)
 
 --Set highlight on search
@@ -444,6 +445,9 @@ cmp.setup {
 require('nvim-autopairs').setup{}
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
+-- Set up colorizer
+require('colorizer').setup()
 
 -- ??? this was in the kickstarter.nvim file already commented out
 -- vim: ts=2 sts=2 sw=2 et
