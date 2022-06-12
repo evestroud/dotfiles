@@ -42,6 +42,10 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter'
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  -- UI feature that displays context in large functions/classes
+  use 'nvim-treesitter/nvim-treesitter-context'
+  -- Code outline window and quick navigation
+  use 'stevearc/aerial.nvim'
   
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'williamboman/nvim-lsp-installer' -- Automated installer for LSPs
@@ -296,6 +300,21 @@ require('nvim-treesitter.configs').setup {
     enable_autocmd = false,
   },
 }
+
+require'treesitter-context'.setup{}
+
+require("aerial").setup({
+  on_attach = function(bufnr)
+    -- Toggle the aerial window with <leader>a
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
+    -- Jump forwards/backwards with '{' and '}'
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '(', '<cmd>AerialPrev<CR>', {})
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', ')', '<cmd>AerialNext<CR>', {})
+    -- Jump up the tree with '[[' or ']]'
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[[', '<cmd>AerialPrevUp<CR>', {})
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']]', '<cmd>AerialNextUp<CR>', {})
+  end
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
