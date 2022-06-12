@@ -59,6 +59,7 @@ require('packer').startup(function(use)
   -- Sets comment string for languages embedded in files, e.g. CSS and JS in an HTML file
   use 'JoosepAlviste/nvim-ts-context-commentstring' 
   use 'norcalli/nvim-colorizer.lua' -- Display CSS colors in-editor
+  use 'gpanders/nvim-parinfer' -- parinfer formatter for Lisps
 end)
 
 --Set highlight on search
