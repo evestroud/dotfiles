@@ -462,6 +462,9 @@ vim.keymap.set('n', 'vv', '^v$h') -- Select text of line only
 vim.keymap.set('i', ';;', '<ESC>A;<ESC>')
 vim.keymap.set('i', '::', '<ESC>A:<ESC>')
 
+-- Yank to clipboard
+vim.keymap.set('n', '\\y', "\"*y")
+
 -- Quick move between windows
 vim.keymap.set('n', '<C-h>', '<C-W>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
