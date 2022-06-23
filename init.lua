@@ -342,13 +342,16 @@ require('nvim-treesitter.configs').setup {
   },
   context_commentstring = {
     enable = true,
-    enable_autocmd = false,
+    -- enable_autocmd = false,
   },
 }
 
 require'treesitter-context'.setup{}
 
 require("aerial").setup({
+  manage_folds = true,
+  -- link_folds_to_tree = true,
+  -- link_tree_to_folds = true,
   on_attach = function(bufnr)
     -- Toggle the aerial window with <leader>a
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
@@ -370,6 +373,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- LSP settings
 require("nvim-lsp-installer").setup {}
 local lspconfig = require 'lspconfig'
+require'lspconfig'.tsserver.setup{
+  cmd = { "typescript-language-server", "--stdio" },
+}
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
