@@ -512,7 +512,7 @@ vim.keymap.set('i', ';;', '<ESC>A;<ESC>')
 vim.keymap.set('i', '::', '<ESC>A:<ESC>')
 
 -- Yank to clipboard
-vim.keymap.set('n', '\\y', "\"*y")
+vim.keymap.set({'n', 'v'}, '\\y', '\"*y')
 
 -- Quick move between windows
 vim.keymap.set('n', '<C-h>', '<C-W>h')
