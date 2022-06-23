@@ -115,6 +115,42 @@ require('lualine').setup {
 
 -- Set up which-key
 require("which-key").setup()
+local wk = require("which-key")
+
+wk.register({
+  ["<leader>"] = {
+    s = {
+      name = "Search",
+      ["<space>"] = "Buffers",
+      f = "Files",
+      b = "Buffer fuzzy find",
+      h = "Help",
+      t = "Tags",
+      d = "grep string",
+      p = "Live grep",
+      o = "Tags - Current buffer only",
+      ["?"] = "Recent files",
+    },
+  g = {
+    name = "Git",
+    s = "Stage hunk",
+    u = "Undo stage hunk",
+    r = "Reset hunk",
+    p = "Preview hunk",
+    S = "Stage buffer",
+    R = "Reset buffer",
+    b = "Blame line",
+    g = "Git Status",
+    c = "GIt Commit",
+    d = {
+      name = "Git Diff",
+      d = "git diff",
+      c = "git diff --cached"
+    },
+  },
+  a = "Code outline window"
+  }
+})
 
 --Setup quick escape mappings
 require("better_escape").setup {
@@ -206,10 +242,10 @@ on_attach = function(bufnr)
     map('n', '<leader>gR', gs.reset_buffer)
     map('n', '<leader>gp', gs.preview_hunk)
     map('n', '<leader>gb', function() gs.blame_line{full=true} end)
-    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    -- map('n', '<leader>tb', gs.toggle_current_line_blame)
     -- map('n', '<leader>gd', gs.diffthis)
     -- map('n', '<leader>gD', function() gs.diffthis('~') end)
-    map('n', '<leader>td', gs.toggle_deleted)
+    -- map('n', '<leader>td', gs.toggle_deleted)
 
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
