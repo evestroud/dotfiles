@@ -62,6 +62,12 @@ require('packer').startup(function(use)
   use 'gpanders/nvim-parinfer' -- parinfer formatter for Lisps
 end)
 
+--Set tab defaults
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 0
+
 --Set highlight on search
 vim.o.hlsearch = false
 
