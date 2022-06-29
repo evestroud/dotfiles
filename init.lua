@@ -27,7 +27,13 @@ require('packer').startup(function(use)
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+  }
+
   use 'folke/which-key.nvim' -- Popup for key combinations
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   -- Add indentation guides even on blank lines
@@ -103,6 +109,9 @@ vim.cmd [[colorscheme rose-pine]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+-- Setup file tree explorer
+require("nvim-tree").setup()
+
 --Set statusbar
 require('lualine').setup {
   options = {
@@ -119,6 +128,7 @@ local wk = require("which-key")
 
 wk.register({
   ["<leader>"] = {
+    t = { "<cmd>NvimTreeToggle<CR>", "File Tree Explorer"},
     s = {
       name = "Search",
       ["<space>"] = "Buffers",
