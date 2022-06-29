@@ -141,7 +141,10 @@ wk.register({
     R = "Reset buffer",
     b = "Blame line",
     g = "Git Status",
-    c = "GIt Commit",
+    c = {
+      c = "Git Commit",
+      a = "Git Commit --amend"
+    },
     d = {
       name = "Git Diff",
       d = "git diff",
@@ -149,12 +152,12 @@ wk.register({
     },
   },
   a = "Code outline window"
-  }
+  },
 })
 
 --Setup quick escape mappings
 require("better_escape").setup {
-      mapping = {"jk", "kj"},
+      mapping = {"jk", "kj", "JK", "KJ"},
       clear_empty_lines = true
 }
 
@@ -253,7 +256,8 @@ on_attach = function(bufnr)
     -- Mappings for Fugitive
     -- from https://www.reddit.com/r/neovim/comments/v31ft4/comment/iavqkcn/
     map('n', '<leader>gg', ':Git status<CR>')
-    map('n', '<leader>gc', ':Git commit<CR>')
+    map('n', '<leader>gcc', ':Git commit<CR>')
+    map('n', '<leader>gca', ':Git commit --amend<CR>')
     map('n', '<leader>gdd', ':Git diff<CR><C-w>L')
     map('n', '<leader>gdc', ':Git diff --cached<CR><C-w>L')
   end
@@ -344,6 +348,10 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     -- enable_autocmd = false,
   },
+  autotag = {
+    enable = true,
+    filetypes = { "html", "htmldjango", "xml" },
+  }
 }
 
 require'treesitter-context'.setup{}
@@ -373,9 +381,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 -- LSP settings
 require("nvim-lsp-installer").setup {}
 local lspconfig = require 'lspconfig'
-require'lspconfig'.tsserver.setup{
-  cmd = { "typescript-language-server", "--stdio" },
-}
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -507,12 +512,13 @@ vim.keymap.set('n', '\\w', ':set wrap!<CR>') -- Toggle word wrap
 -- Safe paste from clipboard 
 vim.keymap.set({'n'}, '\\p', ':set paste<CR>"*p:set nopaste!<CR>')
 vim.keymap.set({'i'}, '\\p', '<Esc>:set paste<CR>"*p:set nopaste!<CR>')
-vim.keymap.set('n', 'vv', '^v$h') -- Select text of line only
+vim.keymap.set('n', 'vv', '^v$') -- Select text of line only
 vim.keymap.set('i', ';;', '<ESC>A;<ESC>')
 vim.keymap.set('i', '::', '<ESC>A:<ESC>')
 
 -- Yank to clipboard
 vim.keymap.set({'n', 'v'}, '\\y', '\"*y')
+vim.keymap.set({'n', 'v'}, '\\\\y', '\"+y')
 
 -- Quick move between windows
 vim.keymap.set('n', '<C-h>', '<C-W>h')
