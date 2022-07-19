@@ -65,7 +65,7 @@ require('packer').startup(function(use)
   -- Sets comment string for languages embedded in files, e.g. CSS and JS in an HTML file
   use 'JoosepAlviste/nvim-ts-context-commentstring' 
   use 'norcalli/nvim-colorizer.lua' -- Display CSS colors in-editor
-  use 'gpanders/nvim-parinfer' -- parinfer formatter for Lisps
+  -- use 'gpanders/nvim-parinfer' -- parinfer formatter for Lisps
 end)
 
 --Set tab defaults
@@ -507,7 +507,9 @@ cmp.setup {
 }
 
 -- Set up autopairs and settings to make it play nice with CMP for new line splitting of pairs
-require('nvim-autopairs').setup{}
+require('nvim-autopairs').setup{
+  enable_check_bracket_line = false
+}
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
@@ -522,6 +524,8 @@ vim.keymap.set('n', '\\w', ':set wrap!<CR>') -- Toggle word wrap
 -- Safe paste from clipboard 
 vim.keymap.set({'n'}, '\\p', ':set paste<CR>"*p:set nopaste!<CR>')
 vim.keymap.set({'i'}, '\\p', '<Esc>:set paste<CR>"*p:set nopaste!<CR>')
+vim.keymap.set({'n'}, '\\\\p', ':set paste<CR>"+p:set nopaste!<CR>')
+vim.keymap.set({'i'}, '\\\\p', '<Esc>:set paste<CR>"+p:set nopaste!<CR>')
 vim.keymap.set('n', 'vv', '^v$') -- Select text of line only
 vim.keymap.set('i', ';;', '<ESC>A;<ESC>')
 vim.keymap.set('i', '::', '<ESC>A:<ESC>')
