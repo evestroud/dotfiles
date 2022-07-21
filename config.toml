@@ -1,0 +1,33 @@
+# Some ideas:
+# Better handling of simultaneous press mappings
+  # e.g. j/k 
+    # shorten timer dramatically
+    # don't freeze cursor
+    # distinguish between a single key press and a chord
+      # prevent chopping off phrases that end in 'k' lol
+    # n/vim use plugins for this
+# 'a' shouldn't cross to new line if it's on the newline character!!!
+# persistent undo / undofile!!!!!!!
+  # I think they are trying to build in undotree and it's not ready yet?
+  # so maybe they don't want to commit to a persistent linear undo system?
+
+# TODO
+# 'cc' replacement?
+# Figure out multiple selections
+# Figure out comma/colon/semicolon bindings
+# Python indent on block???
+# Python triple quotation 
+# Autocomplete sometimes adds first character back at end
+  # sometimes multiple characters - maybe chars typed after picker appears?
+# whitespace clearing ????
+# auto-pairs - delete inserted pair if pair is empty and first is deleted
+# display output of 'Command failed' with pipe command
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.insert]
+j = { k = "normal_mode" }
+k = { j = "normal_mode"}
