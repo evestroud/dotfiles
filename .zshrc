@@ -147,3 +147,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 eval "$(atuin init zsh)"
+
+function aliases() {
+  alias | grep $1
+}
+
+alias a=aliases
