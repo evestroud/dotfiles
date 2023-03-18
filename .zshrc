@@ -107,7 +107,7 @@ show_virtual_env() {
 PS1='$(show_virtual_env)'$PS1
 eval "$(direnv hook zsh)"
 
-plugins=(git ssh-agent)
+plugins=(git ssh-agent z)
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/eve/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
@@ -143,10 +143,12 @@ alias guile="rlwrap guile"
 # git-filter-repo
 export PATH="$PATH:$HOME/.local/bin"
 
-plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
+# alt+r for full atuin view
+bindkey '^[r' _atuin_search_widget
 
 function aliases() {
   alias | grep $1
