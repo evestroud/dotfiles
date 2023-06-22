@@ -1,8 +1,10 @@
 imap jk <Esc>
-imap kj <Esc>
 vmap jk <Esc>
-vmap kj <Esc>
 
 map j gj
 map k gk
 
+map [<Space> O<Esc>j
+map ]<Space> o<Esc>k
+
+map U <C-r>
