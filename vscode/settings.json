@@ -1,0 +1,49 @@
+{
+  "workbench.colorTheme": "Rosé Pine Dawn",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["U"],
+      "after": ["C-r"]
+    },
+    {
+      "before": ["[", "<space>"],
+      "after": ["O", "<Esc>", "j"]
+    },
+    {
+      "before": ["]", "<space>"],
+      "after": ["o", "<Esc>", "k"]
+    },
+    {
+      "before": ["Y"],
+      "after": ["v", "$", "h", "y", "<Esc>"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "vim.sneak": true,
+  "editor.fontSize": 15,
+  "redhat.telemetry.enabled": false,
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.openPositioning": "last",
+  "workbench.editor.enablePreview": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "gitblame.inlineMessageEnabled": true,
+  "git.autofetch": true,
+  "gitblame.ignoreWhitespace": true,
+  "gitblame.inlineMessageFormat": "Blame ${author.name} (${time.ago}), ${commit.summary}"
+}
