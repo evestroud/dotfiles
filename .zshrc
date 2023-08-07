@@ -123,7 +123,7 @@ inode() {
 alias pdb="python3 -m pdb"
 alias task="taskell"
 
-PATH="$PATH:/usr/local/Cellar/llvm/15.0.2/bin"
+PATH="$PATH:/usr/local/opt/llvm/bin"
 
 # setopt CORRECTALL
 
@@ -166,3 +166,7 @@ function aliases() {
 }
 
 alias a=aliases
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
