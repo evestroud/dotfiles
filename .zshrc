@@ -150,6 +150,17 @@ eval "$(atuin init zsh)"
 # alt+r for full atuin view
 bindkey '^[r' _atuin_search_widget
 
+# psc - print available scripts in JS package
+function psc() {
+  cat ./package.json | jq -rS '.scripts'
+# pde - print dependencies in JS package
+function pde() {
+  cat package.json | jq -rS '.dependencies'
+# pdde - print dependencies in JS package
+function pdde() {
+  cat package.json | jq -rS '.devDependencies'
+}
+
 function aliases() {
   alias | grep $1
 }
