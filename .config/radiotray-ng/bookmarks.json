@@ -1,0 +1,160 @@
+[
+	{
+		"group" : "Local",
+		"stations" : 
+		[
+			{
+				"name" : "WRAS Georgia State University",
+				"url" : "http://playerservices.streamtheworld.com/pls/WRASFM.pls"
+			},
+			{
+				"name" : "WREK Georgia Tech",
+				"url" : "http://streaming.wrek.org:8000/wrek_live-128kb.m3u"
+			},
+			{
+				"name" : "WUOG UGA",
+				"url" : "http://stream.wuog.org:8000/stream"
+			},
+			{
+				"name" : "WMRE Emory University",
+				"url" : "https://stream.radio.co/sdfdf17eb4/listen"
+			},
+			{
+				"name" : "WRFG Radio Free Georgia",
+				"url" : "https://s2.radio.co/s2133c4bad/listen"
+			}
+		]
+	},
+	{
+		"group" : "Remote",
+		"stations" : 
+		[
+			{
+				"name" : "KBOO Portland Community Radio",
+				"url" : "https://live.kboo.fm:8443/high"
+			},
+			{
+				"name" : "WCRX Chicago Undergroud Radio",
+				"url" : "http://wcrx.streamguys1.com/live"
+			}
+		]
+	},
+	{
+		"group" : "Chill",
+		"stations" : 
+		[
+			{
+				"name" : "Lounge Radio",
+				"url" : "http://www.lounge-radio.com/listen128.m3u"
+			},
+			{
+				"name" : "Beat Blender",
+				"url" : "http://somafm.com/beatblender.pls"
+			},
+			{
+				"name" : "Secret Agent",
+				"url" : "http://somafm.com/secretagent.pls"
+			},
+			{
+				"name" : "Groove Salad",
+				"url" : "http://somafm.com/groovesalad.pls"
+			},
+			{
+				"name" : "Illinois Street Lounge",
+				"url" : "http://somafm.com/illstreet.pls"
+			}
+		]
+	},
+	{
+		"group" : "Techno / Electronic",
+		"stations" : 
+		[
+			{
+				"name" : "Drone Zone",
+				"url" : "http://somafm.com/dronezone.pls"
+			},
+			{
+				"name" : "Space Station Soma",
+				"url" : "http://somafm.com/spacestation.pls"
+			},
+			{
+				"name" : "cliqhop idm",
+				"url" : "http://somafm.com/cliqhop.pls"
+			},
+			{
+				"name" : "Black Rock FM",
+				"url" : "http://somafm.com/brfm.pls"
+			},
+			{
+				"name" : "New Dance Radio",
+				"url" : "http://jbstream.net/tunein.php/blackoutworm/playlist.asx"
+			},
+			{
+				"name" : "DubStep Beyond",
+				"url" : "http://somafm.com/play/dubstep32"
+			},
+			{
+				"name" : "BassDrive DnB",
+				"url" : "https://www.bassdrive.com/bassdrive.m3u"
+			},
+			{
+				"name" : "Hardstyle",
+				"url" : "http://uk5.internet-radio.com:8270/stream"
+			}
+		]
+	},
+	{
+		"group" : "Algorhythme",
+		"stations" : 
+		[
+			{
+				"name" : "House & Old School",
+				"url" : "https://hno.algorythmeradio.com/stream"
+			},
+			{
+				"name" : "Drum & Bass",
+				"url" : "https://dnb.algorythmeradio.com/stream"
+			},
+			{
+				"name" : "Lounge & Bossa",
+				"url" : "https://lnb.algorythmeradio.com/stream"
+			},
+			{
+				"name" : "UK Garage",
+				"url" : "https://ukg.algorythmeradio.com/stream"
+			}
+		]
+	},
+	{
+		"group" : "root",
+		"stations" : []
+	},
+	{
+		"group" : "REYFM",
+		"stations" : 
+		[
+			{
+				"name" : "REYFM Original",
+				"url" : "https://listen.reyfm.de/reyfm-original/"
+			},
+			{
+				"name" : "REYFM Dance",
+				"url" : "https://listen.reyfm.de/reyfm-dance/"
+			},
+			{
+				"name" : "REYFM Piano House",
+				"url" : "https://listen.reyfm.de/reyfm-piano_house/"
+			}
+		]
+	},
+	{
+		"group" : "Trans",
+		"stations" : 
+		[
+			{
+				"name" : "Trans Radio UK",
+				"url" : "http://streamer.radio.co/s85ebb74c4/listen"
+			}
+		]
+	}
+]

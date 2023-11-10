@@ -1,0 +1,12 @@
+{
+	"bookmarks" : "/home/eve/.config/radiotray-ng/bookmarks.json",
+	"last-station" : "WRAS Georgia State University",
+	"last-station-group" : "Local",
+	"last-station-notifications" : true,
+	"notification-verbose" : true,
+	"notifications" : true,
+	"split-title" : true,
+	"tag-info-verbose" : true,
+	"track-info-copy" : true,
+	"volume-level" : 20
+}
