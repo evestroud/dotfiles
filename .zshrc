@@ -97,22 +97,7 @@ ZSH_THEME="robbyrussell"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-setopt PROMPT_SUBST
-
-show_virtual_env() {
-  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-    echo "($(basename $VIRTUAL_ENV))"
-  fi
-}
-PS1='$(show_virtual_env)'$PS1
-eval "$(direnv hook zsh)"
-
 plugins=(git ssh-agent z)
-
-# heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/eve/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
-
-source /Users/eve/.config/broot/launcher/bash/br
 
 # shortcut for interactive node repl with script
 inode() {
@@ -121,27 +106,6 @@ inode() {
 }
 
 alias pdb="python3 -m pdb"
-alias task="taskell"
-
-PATH="$PATH:/usr/local/opt/llvm/bin"
-
-# setopt CORRECTALL
-
-# for broot
-export EDITOR=hx
-
-# doom emacs
-export PATH="$PATH:$HOME/.emacs.d/bin"
-
-# guile
-export GUILE_LOAD_PATH="/usr/local/share/guile/site/3.0"
-export GUILE_LOAD_COMPILED_PATH="/usr/local/lib/guile/3.0/site-ccache"
-export GUILE_SYSTEM_EXTENSIONS_PATH="/usr/local/lib/guile/3.0/extensions"
-
-alias guile="rlwrap guile"
-
-# git-filter-repo
-export PATH="$PATH:$HOME/.local/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -152,15 +116,15 @@ bindkey '^[r' _atuin_search_widget
 
 # psc - print available scripts in JS package
 function psc() {
-  cat ./package.json | jq -rS '.scripts'
+  cat ./package.json | jq -rS '.scripts' | grep $1
 }
 # pde - print dependencies in JS package
 function pde() {
-  cat package.json | jq -rS '.dependencies'
+  cat package.json | jq -rS '.dependencies' | grep $1
 }
-# pdde - print dependencies in JS package
+# pdde - print dev dependencies in JS package
 function pdde() {
-  cat package.json | jq -rS '.devDependencies'
+  cat package.json | jq -rS '.devDependencies' | grep $1
 }
 
 function aliases() {
@@ -168,7 +132,3 @@ function aliases() {
 }
 
 alias a=aliases
-
-export WASMTIME_HOME="$HOME/.wasmtime"
-
-export PATH="$WASMTIME_HOME/bin:$PATH"
