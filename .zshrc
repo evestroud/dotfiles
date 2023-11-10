@@ -128,7 +128,12 @@ function pdde() {
 }
 
 function aliases() {
-  alias | grep $1
+  if [ -z "$1" ]
+    then
+      alias
+    else
+      alias | grep $1
+  fi
 }
 
 alias a=aliases
