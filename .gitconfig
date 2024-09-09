@@ -1,0 +1,13 @@
+[user]
+	name = Eve Stroud
+	email = evestroud89@gmail.com
+[core]
+	editor = hx
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[push]
+	default = current
+[pull]
+	rebase = false
