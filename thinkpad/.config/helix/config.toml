@@ -29,7 +29,7 @@ A-l = "extend_char_right"
 g = { k = ":buffer-close" }
 
 [keys.insert]
-j = { k = "normal_mode" }
+"C-[" = "normal_mode"
 C-space = "completion"
 A-h = "move_char_left"
 A-j = "move_line_down"

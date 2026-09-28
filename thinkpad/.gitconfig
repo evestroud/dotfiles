@@ -2,7 +2,7 @@
 	name = Eve Stroud
 	email = evestroud89@gmail.com
 [core]
-	editor = hx
+	editor = helix
 [color]
 	diff = auto
 	status = auto
