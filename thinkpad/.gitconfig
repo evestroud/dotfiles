@@ -3,10 +3,6 @@
 	email = evestroud89@gmail.com
 [core]
 	editor = helix
-[color]
-	diff = auto
-	status = auto
-	branch = auto
 [push]
 	default = current
 [pull]
