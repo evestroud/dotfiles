@@ -6,6 +6,11 @@ else
   export EDITOR='hx'
 fi
 
+# MacPorts, ahead of Homebrew: packages move over one at a time as Homebrew
+# stops shipping bottles for this (out-of-support) macOS, so a ported tool
+# should win over any leftover Homebrew copy.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
 # fnm (Homebrew)
 FNM_PATH="/usr/local/opt/fnm/bin"
 if [ -d "$FNM_PATH" ]; then
