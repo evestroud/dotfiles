@@ -1,8 +1,6 @@
 [user]
 	name = Eve Stroud
 	email = evestroud89@gmail.com
-[core]
-	editor = helix
 [push]
 	default = current
 [pull]

@@ -1,0 +1,3 @@
+# Arch packages Helix as `helix`.
+alias hx=helix
+export EDITOR=helix

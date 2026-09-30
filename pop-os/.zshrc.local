@@ -1,0 +1,14 @@
+# Debian/Pop!_OS packages Helix as `hx`, not `helix`.
+alias helix=hx
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='hx'
+fi
+
+# fnm
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --shell zsh)"
+fi

@@ -1,4 +1,3 @@
-# Created by newuser for 5.9.2
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
@@ -21,8 +20,6 @@ eval "$(starship init zsh)"
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
 
-alias hx=helix
-export EDITOR=helix
 alias ls='ls --color=auto'
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -31,3 +28,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # # initialize plugins statically with ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 # antidote load
+
+# Per-machine additions: editor name, language managers, host-specific PATH.
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
