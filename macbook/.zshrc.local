@@ -1,0 +1,13 @@
+# Homebrew packages Helix as `hx`, not `helix`.
+alias helix=hx
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='hx'
+fi
+
+# fnm (Homebrew)
+FNM_PATH="/usr/local/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "$(fnm env --shell zsh)"
+fi

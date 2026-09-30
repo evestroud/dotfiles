@@ -11,7 +11,7 @@ dotfiles/
 ├── common/       # files identical on every machine
 ├── thinkpad/     # Arch, KDE Plasma (Wayland)
 ├── pop-os/       # Pop!_OS 24.04, COSMIC
-├── macbook/      # (not yet)
+├── macbook/      # macOS 15 (Intel, OCLP), Homebrew
 └── tools.txt     # not a package — the tool list, see below
 ```
 

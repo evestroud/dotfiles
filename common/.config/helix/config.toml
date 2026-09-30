@@ -37,5 +37,6 @@ A-k = "move_line_up"
 A-l = "move_char_right"
 
 [keys.select]
+"C-[" = "normal_mode"
 "{" = "goto_prev_paragraph"
 "}" = "goto_next_paragraph"
