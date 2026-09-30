@@ -1,0 +1,38 @@
+# Tools this repo's config assumes are installed.
+#
+# Read by common/.local/bin/check-tools, which reports what's missing on the
+# current machine. It does NOT install anything: package names differ across
+# pacman / apt / brew, and mapping them is a maintenance burden this list is
+# deliberately avoiding. Install by hand, then re-run the check.
+#
+# Format:  tier | names | why
+#   tier   one of shell / auto / agent (see below)
+#   names  space-separated alternatives; any one present counts as installed.
+#          Exists because Helix is `helix` on Arch and `hx` on Debian/Pop.
+#   why    what actually breaks without it — the point of the list. A tool
+#          whose absence has no consequence worth naming doesn't belong here.
+#
+# Tiers, ordered by how loudly a machine complains:
+#   shell  the shell won't come up clean. common/.zshrc calls these
+#          unguarded, so you get errors on every single startup.
+#   auto   the vault's automation breaks — rollover, lint, digests, hooks.
+#   agent  degrades silently. Nothing errors; a capability just quietly
+#          isn't there. This is the tier that needs a list, because no
+#          error message will ever tell you.
+#
+# Not checkable here, but a real dependency: a Nerd Font in the terminal.
+# Without one, starship's prompt and the Claude Code status line render as
+# tofu. It's a terminal setting, not a binary, so `command -v` can't see it.
+
+shell | zsh      | the login shell itself; common/.zshrc is inert without it
+shell | starship | common/.zshrc:31 `eval "$(starship init zsh)"` — unguarded
+shell | fzf      | common/.zshrc:32 `source <(fzf --zsh)` — unguarded; also Ctrl-R history search
+shell | zoxide   | common/.zshrc:33 `eval "$(zoxide init zsh)"` — unguarded
+
+auto  | git      | the syncthing vault's entire change-tracking model, and this repo
+auto  | python3  | vault rollover.py / vault-lint.py / digest runs; also parses the status line's JSON (chosen over jq precisely because jq isn't everywhere)
+auto  | stow     | needed to lay this repo down at all; chicken-and-egg on a new machine
+
+agent | jq       | ~/.claude/hooks/check-context-size.sh. Fails SILENT without it — empty session_id, exit 0 — so a machine without jq is indistinguishable from one where the hook never fires
+agent | rg       | ripgrep; agent sessions reach for it constantly for vault-wide search
+agent | hx helix | $EDITOR. Binary name differs by distro, which is what each host's .zshrc.local aliases

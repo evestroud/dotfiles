@@ -11,8 +11,12 @@ dotfiles/
 ├── common/       # files identical on every machine
 ├── thinkpad/     # Arch, KDE Plasma (Wayland)
 ├── pop-os/       # Pop!_OS 24.04, COSMIC
-└── macbook/      # (not yet)
+├── macbook/      # (not yet)
+└── tools.txt     # not a package — the tool list, see below
 ```
+
+`tools.txt` is repo data, not a dotfile, so it sits at the root and is never
+stowed. Stow only touches the package directories you name.
 
 A machine stows `common/` plus its own directory:
 
@@ -45,6 +49,34 @@ editor's binary name lives (`helix` on Arch, `hx` on Debian/Pop and Homebrew)
 along with any language managers, so `common/.gitconfig` can drop
 `core.editor` entirely and let git fall back to `$EDITOR`.
 
+## Required tools
+
+The config here assumes tools are installed — `common/.zshrc` calls `starship`,
+`fzf` and `zoxide` unguarded, so a machine missing any of them throws errors on
+every shell startup. `tools.txt` states the whole set, each with the reason it's
+wanted, in three tiers by how loudly its absence announces itself:
+
+| tier | without it |
+|---|---|
+| `shell` | errors on every shell startup |
+| `auto` | the vault's rollover / lint / digest automation breaks |
+| `agent` | nothing errors; a capability is silently absent |
+
+That last tier is why the file exists. `jq` sat missing on a machine for
+a while without any signal, because the hook that needs it fails by exiting 0.
+
+```sh
+check-tools        # stowed to ~/.local/bin; reports what's absent and why
+```
+
+It installs nothing — package names differ across pacman / apt / brew and
+mapping them isn't worth the maintenance. Install by hand, re-run the check.
+Exits nonzero if anything is missing, so it can gate a setup script.
+
+Adding a tool: a row in `tools.txt` needs a real consequence in its `why`
+column. If nothing breaks when it's absent, it's a preference, not a
+requirement, and it doesn't belong here.
+
 ## Setting up a new machine
 
 ```sh
@@ -75,6 +107,14 @@ stow -t ~ common <host>
 
 Stow refuses to replace an existing real file, so anything left behind will
 show up as a conflict rather than being silently clobbered.
+
+Either route, finish by checking the machine actually has what the config
+assumes — `check-tools` is only on PATH once `common/` is stowed and a new
+shell has started, so the first run may need the full path:
+
+```sh
+~/.local/bin/check-tools
+```
 
 ## Re-stowing after files move between packages
 

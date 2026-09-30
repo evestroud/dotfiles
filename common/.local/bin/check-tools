@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# check-tools — report which tools from the repo's tools.txt are missing here.
+#
+# Installs nothing. Package names differ across pacman / apt / brew, and this
+# deliberately doesn't try to map them: it tells you what's absent and why it
+# matters, you install it, you re-run.
+#
+# Finds tools.txt by resolving its own symlink back into the repo (this file
+# is stowed to ~/.local/bin/check-tools). Override with DOTFILES_TOOLS=/path.
+#
+# Exit 0 if everything's present, 1 if anything is missing — so it can gate a
+# setup script, not just be read by a human.
+
+set -uo pipefail
+
+if [ -n "${DOTFILES_TOOLS:-}" ]; then
+  tools_file="$DOTFILES_TOOLS"
+else
+  # $0 -> <repo>/common/.local/bin/check-tools, so the repo root is four up.
+  self=$(readlink -f "$0" 2>/dev/null) || self="$0"
+  tools_file="$(cd "$(dirname "$self")/../../.." 2>/dev/null && pwd)/tools.txt"
+fi
+
+if [ ! -f "$tools_file" ]; then
+  echo "check-tools: can't find tools.txt (looked at: $tools_file)" >&2
+  echo "  set DOTFILES_TOOLS=/path/to/tools.txt if the repo moved" >&2
+  exit 2
+fi
+
+missing=0
+present=0
+
+# Pure-bash trim. Not `xargs`: the why-text contains quotes (it cites shell
+# snippets like eval "$(starship init zsh)") and xargs parses those.
+trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s' "$s"
+}
+
+while IFS='|' read -r tier names why; do
+  # strip comments and blanks
+  tier="${tier%%#*}"
+  tier=$(printf '%s' "$tier" | tr -d '[:space:]')
+  [ -z "$tier" ] && continue
+
+  names=$(trim "${names:-}")
+  why=$(trim "${why:-}")
+  canonical="${names%% *}"
+
+  found=""
+  for n in $names; do
+    if command -v "$n" >/dev/null 2>&1; then found="$n"; break; fi
+  done
+
+  if [ -n "$found" ]; then
+    present=$((present + 1))
+    note=""
+    [ "$found" != "$canonical" ] && note="  (as $found)"
+    printf '  %-6s %-9s ok%s\n' "$tier" "$canonical" "$note"
+  else
+    missing=$((missing + 1))
+    printf '  %-6s %-9s MISSING  <- %s\n' "$tier" "$canonical" "$why"
+  fi
+done < "$tools_file"
+
+echo
+if [ "$missing" -eq 0 ]; then
+  echo "all $present present on $(hostname)"
+  exit 0
+fi
+echo "$missing missing on $(hostname) ($present present)"
+exit 1
