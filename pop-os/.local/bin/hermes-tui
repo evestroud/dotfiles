@@ -1,0 +1,8 @@
+#!/bin/sh
+# hermes-tui: the Hermes terminal chat, attached to the running service on pop-os.
+# Runs as the `hermes` host user via sudo (asks for your password); exiting the
+# TUI drops you back in this shell. Extra arguments go to the hermes CLI, e.g.
+# `hermes-tui logs --follow`. Never start a second Hermes container instead:
+# two containers on ~hermes/.hermes corrupt its sessions and memory.
+uid=$(id -u hermes) || exit 1
+exec sudo -iu hermes env XDG_RUNTIME_DIR="/run/user/$uid" podman exec -it hermes hermes "$@"
