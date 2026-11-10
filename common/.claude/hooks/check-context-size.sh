@@ -27,7 +27,8 @@
 # where the hook simply never fires.
 
 # --- Tunable constants ---
-CONTEXT_TOKEN_THRESHOLD=40000   # below this estimated token count, never nag
+CONTEXT_TOKEN_THRESHOLD=150000  # below this estimated token count, never nag — under
+                                 # ~150k, re-reading cold context is cheap enough not to matter
 CACHE_TTL_SECONDS=3600          # 1 hour: the automatic TTL on any Claude subscription
                                  # (Pro/Max/Team/Enterprise) in Claude Code. Only bare
                                  # API-key/third-party usage gets the 5-minute default.
