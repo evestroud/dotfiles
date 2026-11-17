@@ -1,0 +1,7 @@
+# Ubuntu packages Helix as `hx`, not `helix`.
+alias helix=hx
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='hx'
+fi
